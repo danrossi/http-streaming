@@ -188,7 +188,9 @@ export class MasterPlaylistController extends videojs.EventTarget {
 
       // if this isn't a live video and preload permits, start
       // downloading segments
-      if (media.endList && this.tech_.preload() !== 'none') {
+      //if (media.endList && this.tech_.preload() !== 'none') {
+      // don't block preload on live streams
+      if (this.tech_.preload() !== 'none') {
         this.mainSegmentLoader_.playlist(media, this.requestOptions_);
         this.mainSegmentLoader_.load();
       }
